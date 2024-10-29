@@ -1,4 +1,4 @@
-package crudApp.model.entity;
+package crudApp.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

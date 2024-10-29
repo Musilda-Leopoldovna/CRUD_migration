@@ -1,9 +1,9 @@
-package crudApp.model.services;
+package crudApp.services;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import crudApp.model.dao.UserDao;
-import crudApp.model.entity.User;
+import crudApp.dao.UserDao;
+import crudApp.entity.User;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -21,16 +21,16 @@ public class UserServiceImpl implements UserService {
         userDao.saveUser(user);
     }
 
-    public void removeUserById(Long ID) {
-        userDao.deleteUserDaoById(ID);
+    public void removeUserByID(Long ID) {
+        userDao.deleteUserDaoByID(ID);
     }
 
     public void changeUser(User updUser) {
         userDao.changeUserDao(updUser);
     }
 
-    public User getUserById(Long userId) {
-        return userDao.findUserById(userId);
+    public User getUserByID(Long userId) {
+        return userDao.findUserByID(userId);
     }
 }
 

@@ -1,17 +1,17 @@
-package crudApp.model.services;
+package crudApp.services;
 
 import java.util.List;
-import crudApp.model.entity.User;
+import crudApp.entity.User;
 
 public interface UserService {
     void addNewUser(User user);
 
-    void removeUserById(Long userID);
+    void removeUserByID(Long userID);
 
     void changeUser(User user);
 
     List<User> getListOfUsers();
 
-    User getUserById(Long ID);
+    User getUserByID(Long ID);
 }
 
