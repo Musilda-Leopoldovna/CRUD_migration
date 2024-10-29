@@ -120,7 +120,7 @@
         <td><span th:text="${user.age}"> </span></td>
         <td><span th:text="${user.email}"> </span></td>
         <td>
-            <form class="inline-form" th:action="@{/static}" method="get">
+            <form class="inline-form" th:action="@{/}" method="get">
                 <input type="hidden" name="editId" th:value="${user.ID}" />
                 <input type="submit" name="update" value="upd" title="редактировать" />
             </form>
