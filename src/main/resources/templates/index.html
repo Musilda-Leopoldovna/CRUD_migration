@@ -4,7 +4,7 @@
       lang="ru">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>"Список пользователей"</title>
 
     <style>
@@ -33,22 +33,22 @@
             color: #dae2e8;
         }
         th:nth-child(1) {
-            width: 40px;
+            width: 5%;
         }
         th:nth-child(2) {
-            width: 150px;
+            width: 20%;
         }
         th:nth-child(3) {
-            width: 150px;
+            width: 30%;
         }
         th:nth-child(4) {
-            width: 40px;
+            width: 5%;
         }
         th:nth-child(5) {
-            width: 200px;
+            width: 30%;
         }
         th:nth-child(6) {
-            width: 50px;
+            width: 10%;
             max-width: 50px;
         }
         td {
@@ -57,7 +57,7 @@
             width: fit-content;
             text-align: center;
         }
-        button[name="add"] {
+        .add-button {
             border: 2px ridge #c0d6e4;
             border-radius: 3px;
             padding: 5px 15px;
@@ -69,9 +69,6 @@
             display: inline-block;
             margin-right: 2px;
         }
-        table {
-            width: 70%;
-        }
         .edit-form {
             display: none;
         }
@@ -80,23 +77,34 @@
             width: 60%;
             display: block;
         }
-        input[name="update"] {
+        .update-form {
             border: 2px ridge #c0d6e4;
             border-radius: 5px;
             font-weight: bolder;
             color: #718091;
             background-color: #f6e16d;
         }
-        input[name="delete"] {
+        .delete-form {
             border: 2px ridge #c0d6e4;
             border-radius: 5px;
             font-weight: bolder;
             color: #718091;
             background-color: #fb614c;
         }
-        blockquote[name="input"] {
+        .input {
             margin-inline: 20% 5%;
-            width: 80%;
+            .firstName {
+                width: 13%;
+            }
+            .lastName {
+                width: 22%;
+            }
+            .age {
+                width: 5%;
+            }
+            .email {
+                width: 22%;
+            }
         }
     </style>
 </head>
@@ -122,25 +130,26 @@
         <td>
             <form class="inline-form" th:action="@{/}" method="get">
                 <input type="hidden" name="editId" th:value="${user.ID}" />
-                <input type="submit" name="update" value="upd" title="редактировать" />
+                <input class="update-form" type="submit" name="update" value="upd" title="редактировать" />
             </form>
             <form class="inline-form" th:action="@{/delete}" method="post">
                 <input type="hidden" name="deleteId" th:value="${user.ID}" />
-                <input type="submit" name="delete" value="del" title="удалить" />
+                <input class="delete-form" type="submit" name="delete" value="del" title="удалить" />
             </form>
         </td>
     </tr>
     </tbody>
 </table>
-<blockquote name="input">
+<blockquote class="input">
     <form th:action="@{/addUser}" method="post">
-        <input type="text" size="20" maxlength="20" name="firstName" id="firstName" placeholder="Имя" th:value="${user.firstName}" />
-        <input type="text" size="40" maxlength="40" name="lastName" id="lastName" placeholder="Фамилия" th:value="${user.lastName}" />
-        <input type="text" size="5" maxlength="2" name="age" id="age" placeholder="Возраст" th:value="${user.age != null ? user.age : ''}" />
-        <input type="text" size="40" maxlength="40" name="email" id="email" placeholder="Эл.адрес" th:value="${user.email}" />
+        <input class="firstName" type="text" maxlength="20" name="firstName" id="firstName" placeholder="Имя" th:value="${user.firstName}" />
+        <input class="lastName" type="text" maxlength="40" name="lastName" id="lastName" placeholder="Фамилия" th:value="${user.lastName}" />
+        <input class="age" type="number" min="0" max="99" name="age" id="age" placeholder="Возраст" oninput="this.setCustomValidity('')"
+               oninvalid="this.setCustomValidity('Введите число не меньше нуля и не больше 99')" th:value="${user.age}" />
+        <input class="email" type="text" maxlength="40" name="email" id="email" placeholder="Эл.адрес" th:value="${user.email}" />
         <br />
         <br />
-        <button type="submit" name="add">добавить пользователя</button>
+        <button class="add-button" type="submit" name="add">добавить пользователя</button>
     </form>
 </blockquote>
 <div th:if="${editUser != null}" class="edit-form active">
@@ -149,7 +158,8 @@
         <input type="hidden" name="ID" th:value="${editUser.ID}" />
         <input type="text" size="20" maxlength="20" name="firstName" placeholder="Имя" th:value="${editUser.firstName}" />
         <input type="text" size="40" maxlength="40" name="lastName" placeholder="Фамилия" th:value="${editUser.lastName}" />
-        <input type="text" size="5" maxlength="2" name="age" placeholder="Возраст" th:value="${editUser.age != null ? editUser.age : ''}" />
+        <input type="number" min="0" max="99" name="age" placeholder="Возраст" oninput="this.setCustomValidity('')"
+               oninvalid="this.setCustomValidity('Введите число не меньше нуля  и не больше 99')" th:value="${editUser.age}" />
         <input type="text" size="40" maxlength="40" name="email" placeholder="Эл.адрес" th:value="${editUser.email}" />
         <br />
         <br />
